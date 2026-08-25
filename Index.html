@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura 🌸 Discord Community</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0d0d13;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #ff79c6;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .subtitle {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #aaa;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .title span {
+            color: #ff79c6;
+        }
+
+        .motto {
+            font-size: 13px;
+            color: #8b8b9e;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+            border: none;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 121, 198, 0.1);
+            color: #ff79c6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .stat-info .number {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .stat-info .label {
+            font-size: 11px;
+            color: #7a7a8c;
+        }
+
+        /* Navigation Sections */
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #5a5a6e;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-item-wrapper {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-sub {
+            font-size: 11px;
+            color: #6a6a7c;
+        }
+
+        .arrow {
+            color: #ff79c6;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        /* Accordion Content */
+        .nav-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .nav-content-inner {
+            padding: 0 16px 16px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 4px;
+            padding-top: 12px;
+        }
+
+        .nav-item-wrapper.active .arrow {
+            transform: rotate(90deg);
+        }
+
+        .nav-item-wrapper.active .nav-content {
+            max-height: 300px;
+        }
+
+        /* Rules Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #14141d;
+            border: 1px solid rgba(255, 121, 198, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: #fff;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff79c6;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .rules-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        .rule-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 14px;
+            border-radius: 10px;
+            border-left: 3px solid #ff79c6;
+        }
+
+        .rule-title {
+            font-weight: 700;
+            color: #ff79c6;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .rule-desc {
+            color: #b9b9c8;
+            line-height: 1.5;
+        }
+
+        .rule-warning {
+            background: rgba(255, 65, 108, 0.1);
+            border: 1px solid rgba(255, 65, 108, 0.3);
+            color: #ff79c6;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* Bottom Nav Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: rgba(13, 13, 19, 0.85);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .bottom-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #6a6a7c;
+            font-size: 10px;
+            font-weight: 600;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .bottom-item.active, .bottom-item:hover {
+            color: #ff79c6;
+        }
+
+        .bottom-icon {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="home">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">Sakura <span>桜</span></div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="subtitle">Welcome to</div>
+        <div class="title">SAKURA <span>桜</span></div>
+        <div class="motto">Нэг зорилго • Нэг баг • Нэг гэр бүл</div>
+        
+        <div class="cta-buttons">
+            <a href="https://discord.gg/3KXEbrGe" target="_blank" class="btn btn-primary">
+                Join Discord
+            </a>
+            <button class="btn btn-secondary" onclick="openRules()">Rules</button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+                <div class="number">35+</div>
+                <div class="label">Members</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🤖</div>
+            <div class="stat-info">
+                <div class="number">10+</div>
+                <div class="label">Bots</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+                <div class="number">24/7</div>
+                <div class="label">Active</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🗓️</div>
+            <div class="stat-info">
+                <div class="number">2026</div>
+                <div class="label">Since</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div>
+        <div class="section-title">Main Sections</div>
+        <div class="nav-list">
+            
+            <!-- About Us -->
+            <div class="nav-item-wrapper" onclick="toggleAccordion(this)">
+                <div class="nav-item">
+                    <div class="nav-left">
+                        <div>
+                            <div class="nav-title">About Us</div>
+                            <div class="nav-sub">Бидний тухай</div>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="nav-content">
+                    <div class="nav-content-inner">
+                        Sakura 🌸 сервэр нь бүх төрлийн тоглоомчид, хөгжим ба урлагт сонирхолтой залуусыг нэгтгэсэн, найрсгаар харилцах боломжтой нээлттэй community юм.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="nav-item-wrapper" onclick="toggleAccordion(this)">
+                <div class="nav-item">
+                    <div class="nav-left">
+                        <div>
+                            <div class="nav-title">Features</div>
+                            <div class="nav-sub">Онцлогууд</div>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="nav-content">
+                    <div class="nav-content-inner">
+                        • 24/7 Хөгжмийн ботууд<br>
+                        • Автомат Rank & Level систем<br>
+                        • Өдөр тутмын тоглоомын арга хэмжээнүүд<br>
+                        • Тусгай тохируулгатай Voice сувгууд
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Lounge -->
+            <div class="nav-item-wrapper" onclick="toggleAccordion(this)">
+                <div class="nav-item">
+                    <div class="nav-left">
+                        <div>
+                            <div class="nav-title">Voice Lounge</div>
+                            <div class="nav-sub">Дуу хоолой</div>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="nav-content">
+                    <div class="nav-content-inner">
+                        Та яриад суух, хамтдаа дуу сонсох болон Standoff, Roblox, Minecraft, CS2 зэрэг дуртай тоглоомоо бусадтайгаа хамтран тоглох боломжтой ярианы өрөөнүүдтэй.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="nav-item-wrapper" onclick="toggleAccordion(this)">
+                <div class="nav-item">
+                    <div class="nav-left">
+                        <div>
+                            <div class="nav-title">Gallery</div>
+                            <div class="nav-sub">Зургууд</div>
+                        </div>
+                    </div>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="nav-content">
+                    <div class="nav-content-inner">
+                        Сервэрийн гишүүдийн хуваалцсан дурсгалтай агшнууд, тоглоомын Screenshot болон ART бүтээлүүдийг Discord дээрх #face-reveal болон тусгай сувгуудаас үзээрэй!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Rules Modal (Поп-ап) -->
+<div class="modal" id="rulesModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">🌸 Sakura 桜 — Server rules</div>
+            <button class="close-btn" onclick="closeRules()">&times;</button>
+        </div>
+        <div class="rules-list">
+            <div class="rule-item">
+                <div class="rule-title">01・𝐑𝐞𝐬𝐩𝐞𝐜𝐭</div>
+                <div class="rule-desc">Бусадтай хүндэтгэлтэй хандах. Хэн нэгнийг доромжлох, дээрэлхэх, эвгүй байдалд оруулахыг хориглоно.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">02・𝐍𝐨 𝐬𝐩𝐚𝐦</div>
+                <div class="rule-desc">Нэг зүйлийг олон дахин давтаж бичих, emoji/reaction spam хийхгүй байх.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">03・𝐍𝐨 𝐍𝐒𝐅𝐖</div>
+                <div class="rule-desc">NSFW, 18+ болон зохисгүй контент оруулахыг хориглоно.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">04・𝐍𝐨 𝐚𝐝</div>
+                <div class="rule-desc">Зөвшөөрөлгүйгээр өөрийн server, social media, link болон бусад зүйлийг сурталчлахгүй.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">05・𝐍𝐨 𝐝𝐫𝐚𝐦𝐚</div>
+                <div class="rule-desc">Хэрүүл маргаан үүсгэхгүй хэрэв хэн нэгэнтэй ямар нэгэн зөрчилдөөн үүссэн бол staff-д хандана уу.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">06・𝐔𝐬𝐞 𝐜𝐡𝐚𝐧𝐧𝐞𝐥𝐬 𝐜𝐨𝐫𝐫𝐞𝐜𝐭𝐥𝐲</div>
+                <div class="rule-desc">Суваг бүрийг зориулалтын дагуу ашиглана. Зөв channel-д зөв зүйлээ бичнэ.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">07・𝐍𝐨 𝐍𝐮𝐤𝐞</div>
+                <div class="rule-desc">Spam attack, mass mention болон server-д хор хөнөөл учруулах үйлдэл хийхгүй.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">08・𝐏𝐫𝐢𝐯𝐚𝐜𝐲</div>
+                <div class="rule-desc">Бусдын хувийн мэдээлэл, зураг, social account зэрэг мэдээллийг зөвшөөрөлгүй тараахгүй байх.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">09・𝐒𝐭𝐚𝐟𝐟 𝐑𝐞𝐬𝐩𝐞𝐜𝐭</div>
+                <div class="rule-desc">Staff-ийн шийдвэрийг хүндэтгэнэ. Асуудалтай гэж үзвэл staff-д тайван байдлаар хэлнэ.</div>
+            </div>
+            <div class="rule-item">
+                <div class="rule-title">10・𝐇𝐚𝐯𝐞 𝐟𝐮𝐧! 🌸</div>
+                <div class="rule-desc">Хамгийн гол нь Sakura-д тухтай орчин бүрдүүлж хамтдаа хөгжилтэй байх нь чухал шүү.</div>
+            </div>
+            <div class="rule-warning">
+                ⚠️ Дүрэм зөрчсөн тохиолдолд warning / time out / ban авах боломжтой.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Navigation Bar -->
+<div class="bottom-nav">
+    <div class="bottom-item active" onclick="scrollToTop()">
+        <span class="bottom-icon">🏠</span>
+        <span>Home</span>
+    </div>
+    <div class="bottom-item" onclick="openRules()">
+        <span class="bottom-icon">📜</span>
+        <span>Rules</span>
+    </div>
+    <a href="https://discord.gg/3KXEbrGe" target="_blank" class="bottom-item">
+        <span class="bottom-icon">💬</span>
+        <span>Discord</span>
+    </a>
+</div>
+
+<script>
+    function toggleAccordion(element) {
+        const isActive = element.classList.contains('active');
+        document.querySelectorAll('.nav-item-wrapper').forEach(item => {
+            item.classList.remove('active');
+        });
+        if (!isActive) {
+            element.classList.add('active');
+        }
+    }
+
+    function openRules() {
+        document.getElementById('rulesModal').style.display = 'flex';
+    }
+
+    function closeRules() {
+        document.getElementById('rulesModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('rulesModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
